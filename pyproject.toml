@@ -1,0 +1,42 @@
+[project]
+name = "logo-wizard"
+version = "0.0.1"
+description = "Local text-to-title-logo generator trained on synthetic data"
+requires-python = ">=3.11"
+dependencies = [
+    "uharfbuzz",
+    "skia-python",
+    "pillow",
+    "numpy",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+train = ["torch>=2.4", "pytesseract", "onnx"]
+app = ["fastapi", "uvicorn", "onnxruntime"]
+dev = ["pytest", "httpx"]
+
+[project.scripts]
+logo-wizard-corpus = "logo_wizard.corpus.build:main"
+logo-wizard-fonts = "logo_wizard.fonts.fetch:main"
+logo-wizard-render = "logo_wizard.render.cli:main"
+logo-wizard-app = "logo_wizard.app.server:main"
+logo-wizard-synth = "logo_wizard.synth.generate:main"
+logo-wizard-train-layout = "logo_wizard.train.layout:main"
+logo-wizard-layout-compare = "logo_wizard.train.compare_layout:main"
+logo-wizard-train-stylizer = "logo_wizard.train.stylizer:main"
+logo-wizard-eval-stylizer = "logo_wizard.train.eval_stylizer:main"
+logo-wizard-export-onnx = "logo_wizard.infer.onnx_export:main"
+logo-wizard-finetune-layout = "logo_wizard.train.finetune_layout:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/logo_wizard"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+filterwarnings = ["ignore:enable_nested_tensor is True"]
