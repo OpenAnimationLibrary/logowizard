@@ -1,8 +1,11 @@
 [project]
 name = "logo-wizard"
-version = "0.0.1"
+version = "0.1.0"
 description = "Local text-to-title-logo generator trained on synthetic data"
 requires-python = ">=3.11"
+license = "BSD-3-Clause"
+license-files = ["LICENSE", "DATA_LICENSES.md", "CREDITS.md"]
+authors = [{name = "Rodney Baker"}]
 dependencies = [
     "uharfbuzz",
     "skia-python",
@@ -10,6 +13,11 @@ dependencies = [
     "numpy",
     "pyyaml",
 ]
+
+[project.urls]
+Homepage = "https://github.com/OpenAnimationLibrary/logowizard"
+Repository = "https://github.com/OpenAnimationLibrary/logowizard"
+Issues = "https://github.com/OpenAnimationLibrary/logowizard/issues"
 
 [project.optional-dependencies]
 train = ["torch>=2.4", "pytesseract", "onnx"]
